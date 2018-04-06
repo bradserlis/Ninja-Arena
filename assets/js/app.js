@@ -51,16 +51,16 @@ function create()
 
     this.anims.create({
         key: 'attack',
-        frames: this.anims.generateFrameNumbers('ninja1', { start: 10, end: 14 }),
-        frameRate: 15,
+        frames: this.anims.generateFrameNumbers('ninja1', { start: 0, end: 3 }),
+        frameRate: 10,
         repeat: 0
     });
 
-    // this.anims.create({
-    //     key: 'turn',
-    //     frames: [ { key: 'ninja1', frame: 4 } ],
-    //     frameRate: 2
-    // });
+    this.anims.create({
+        key: 'turn',
+        frames: [ { key: 'ninja1', frame: 0 } ],
+        frameRate: 2
+    });
 
     this.anims.create({
         key: 'right',
@@ -77,6 +77,8 @@ function create()
     })
 
     cursors = this.input.keyboard.createCursorKeys();
+    keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+
     
     //will need this for collisions between players/enemies
     // this.physics.add.collider(player, platforms);
@@ -94,6 +96,32 @@ function update ()
             player.anims.play('right', true)
         }
     } 
+
+    // switch(cursors){
+    //     case cursors.left.isDown:
+    //     player.setVelocityX(-160);
+    //     player.setScale(-1, 1);
+    //     player.anims.play('left', true);
+    //     direction = 'left';
+    //     break;
+    //     case cursors.right.isDown:
+    //     player.setVelocityX(160);
+    //     player.setScale(1, 1);
+    //     player.anims.play('right', true);
+    //     direction = 'right';
+    //     break;
+    //     case cursors.up.isDown:
+    //      player.setVelocityY(-160);
+    //     // player.setScale(1, 1);
+    //     directionCheck();
+    //     break;
+    //     case cursors.down.isDown: 
+    //     player.setVelocityY(160);
+    //     // player.setScale(1, 1);
+    //     directionCheck();
+    //     break;
+    //     default:
+    // }
 
     if (cursors.left.isDown)
     {
@@ -121,6 +149,20 @@ function update ()
         // player.setScale(1, 1);
         directionCheck();
     }
+     else if (keyA.isDown)
+    {
+        player.anims.play('attack', true);
+    }
+
+ // var controlConfig = {
+ //        left: cursors.left,
+ //        right: cursors.right,
+ //        up: cursors.up,
+ //        down: cursors.down,
+ //        p1attack: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
+ //    };
+
+    // controls = new Phaser.Cameras.Controls.Smoothed(controlConfig);
 
     // else
     // {
