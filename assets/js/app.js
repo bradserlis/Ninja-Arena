@@ -12,8 +12,7 @@ var config = {
     }
 };
 
-var player;
-var cursors;
+
 var game = new Phaser.Game(config);
 
 function preload ()
@@ -22,137 +21,89 @@ function preload ()
     this.load.image('backdrop', 'assets/qubodup-light_wood.png')
     this.load.spritesheet('ninja1', 
     'assets/ninja-small.png',
-    { frameWidth: 130, frameHeight: 90 } 
+    { frameWidth: 130, frameHeight: 90 }) 
+    this.load.spritesheet('slime1', 
+    'assets/slime.png',
+    { frameWidth: 32, frameHeight: 32 })
     // this.load.spritesheet('ninja1', 
     // 'assets/ninja2.png',
     // { frameWidth: 200, frameHeight: 145 }
     // this.load.image('sky', 'assets/skies/space3.png');
     // this.load.image('logo', 'assets/sprites/phaser3-logo.png');
     // this.load.image('red', 'assets/particles/red.png');
-)}
+}
 
 function create()
 {
 
+//=== 
+//background 
+//===
     let bg = this.add.image('0', '0', 'backdrop');
     bg.setOrigin(0,0)
-    
+
+//=== 
+//player sprite setup
+//===
+
     player = this.physics.add.sprite(200, 500, 'ninja1');
     // player.setBounce(0.2);
     player.setCollideWorldBounds(true);
     player.setScale(1, 1);
+    player.direction = 'right';
+    createPlayer1Animations();
 
-    this.anims.create({
-        key: 'left',
-        frames: this.anims.generateFrameNumbers('ninja1', { start: 10, end: 14 }),
-        frameRate: 15,
-        repeat: 0
-    });  
+//=== 
+//enemy sprite setup
+//===
+    slime1 = this.physics.add.sprite(200, 100, 'slime1');
+    slime1.setCollideWorldBounds(true);
+    slime1.setScale(3)
+    createSlimeAnimations();
 
-    this.anims.create({
-        key: 'attack',
-        frames: this.anims.generateFrameNumbers('ninja1', { start: 0, end: 3 }),
-        frameRate: 10,
-        repeat: 0
-    });
-
-    this.anims.create({
-        key: 'turn',
-        frames: [ { key: 'ninja1', frame: 0 } ],
-        frameRate: 2
-    });
-
-    this.anims.create({
-        key: 'right',
-        frames: this.anims.generateFrameNumbers('ninja1', { start: 10, end: 14 }),
-        frameRate: 15,
-        repeat: 0
-    });
-
-    this.anims.create({
-        key:'up',
-        frames: this.anims.generateFrameNumbers('ninja1', {start:0, end: 3}),
-        frameRate: 15,
-        repeat:0
-    })
-
+//=== 
+//player input setup  
+//===
     cursors = this.input.keyboard.createCursorKeys();
     keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
 
-    
-    //will need this for collisions between players/enemies
-    // this.physics.add.collider(player, platforms);
+
+//=== 
+//player - enemy collisions
+//===
+
+this.physics.add.collider(player, slime1);
 }
 
 function update ()
 {
-    player.setVelocityX(0);
-    player.setVelocityY(0);
-    let direction;
-    function directionCheck() {
-        if(direction === 'left'){
-            player.anims.play('left', true)
-        } else {
-            player.anims.play('right', true)
-        }
-    } 
+    
+    player1Logic();
+    enemy1Logic();
+    //player2Logic()
 
-    // switch(cursors){
-    //     case cursors.left.isDown:
-    //     player.setVelocityX(-160);
-    //     player.setScale(-1, 1);
-    //     player.anims.play('left', true);
-    //     direction = 'left';
-    //     break;
-    //     case cursors.right.isDown:
-    //     player.setVelocityX(160);
-    //     player.setScale(1, 1);
-    //     player.anims.play('right', true);
-    //     direction = 'right';
-    //     break;
-    //     case cursors.up.isDown:
-    //      player.setVelocityY(-160);
-    //     // player.setScale(1, 1);
-    //     directionCheck();
-    //     break;
-    //     case cursors.down.isDown: 
-    //     player.setVelocityY(160);
-    //     // player.setScale(1, 1);
-    //     directionCheck();
-    //     break;
-    //     default:
+
+
+
+
+//Notes for additional content
+
+//startFollow function, to be used on enemies later
+// function create ()
+    // {
+    //     this.add.image(400, 300, 'sky');
+    //     var particles = this.add.particles('red');
+    //     var emitter = particles.createEmitter({
+    //         speed: 100,
+    //         scale: { start: 1, end: 0 },
+    //         blendMode: 'ADD'
+    //     });
+    //     var logo = this.physics.add.image(400, 100, 'logo');
+    //     logo.setVelocity(100, 200);
+    //     logo.setBounce(1, 1);
+    //     logo.setCollideWorldBounds(true);
+    //     emitter.startFollow(logo);
     // }
-
-    if (cursors.left.isDown)
-    {
-        player.setVelocityX(-160);
-        player.setScale(-1, 1);
-        player.anims.play('left', true);
-        direction = 'left';
-    }
-    else if (cursors.right.isDown)
-    {
-        player.setVelocityX(160);
-        player.setScale(1, 1);
-        player.anims.play('right', true);
-        direction = 'right';
-    }
-    else if (cursors.up.isDown)
-    {
-        player.setVelocityY(-160);
-        // player.setScale(1, 1);
-        directionCheck();
-
-    }else if (cursors.down.isDown)
-    {
-        player.setVelocityY(160);
-        // player.setScale(1, 1);
-        directionCheck();
-    }
-     else if (keyA.isDown)
-    {
-        player.anims.play('attack', true);
-    }
 
  // var controlConfig = {
  //        left: cursors.left,
