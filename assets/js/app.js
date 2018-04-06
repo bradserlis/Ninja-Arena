@@ -1,6 +1,6 @@
 var config = {
     type: Phaser.AUTO,
-    width: 800,
+    width: 1200,
     height: 600,
     physics: {
         default: 'arcade'
@@ -33,15 +33,24 @@ function preload ()
 
 function create()
 {
-    this.add.image('400', '400', 'backdrop')
+
+    let bg = this.add.image('0', '0', 'backdrop');
+    bg.setOrigin(0,0)
     
-    player = this.physics.add.sprite(150, 200, 'ninja1');
-    player.setBounce(0.2);
+    player = this.physics.add.sprite(200, 500, 'ninja1');
+    // player.setBounce(0.2);
     player.setCollideWorldBounds(true);
     player.setScale(1, 1);
 
     this.anims.create({
         key: 'left',
+        frames: this.anims.generateFrameNumbers('ninja1', { start: 10, end: 14 }),
+        frameRate: 15,
+        repeat: 0
+    });  
+
+    this.anims.create({
+        key: 'attack',
         frames: this.anims.generateFrameNumbers('ninja1', { start: 10, end: 14 }),
         frameRate: 15,
         repeat: 0
@@ -68,34 +77,57 @@ function create()
     })
 
     cursors = this.input.keyboard.createCursorKeys();
-
+    
+    //will need this for collisions between players/enemies
+    // this.physics.add.collider(player, platforms);
 }
 
 function update ()
 {
     player.setVelocityX(0);
+    player.setVelocityY(0);
+    let direction;
+    function directionCheck() {
+        if(direction === 'left'){
+            player.anims.play('left', true)
+        } else {
+            player.anims.play('right', true)
+        }
+    } 
 
     if (cursors.left.isDown)
     {
         player.setVelocityX(-160);
         player.setScale(-1, 1);
         player.anims.play('left', true);
+        direction = 'left';
     }
     else if (cursors.right.isDown)
     {
         player.setVelocityX(160);
         player.setScale(1, 1);
         player.anims.play('right', true);
+        direction = 'right';
     }
+    else if (cursors.up.isDown)
+    {
+        player.setVelocityY(-160);
+        // player.setScale(1, 1);
+        directionCheck();
+
+    }else if (cursors.down.isDown)
+    {
+        player.setVelocityY(160);
+        // player.setScale(1, 1);
+        directionCheck();
+    }
+
     // else
     // {
     //     player.setVelocityX(0);
 
     //     player.anims.play('turn');
     // }
-
-    if (cursors.up.isDown && player.body.touching.down)
-    {
-        player.setVelocityY(-330);
-    }
 }
+
+
