@@ -1,30 +1,29 @@
-var config = {
-    type: Phaser.AUTO,
-    width: 1200,
-    height: 600,
-    physics: {
-        default: 'arcade'
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
+// var config = {
+//     type: Phaser.AUTO,
+//     width: 1200,
+//     height: 720,
+//     physics: {
+//         default: 'arcade'
+//     },
+//     scene: {
+//         preload: preload,
+//         create: create,
+//         update: update
+//     }
+// };
 
 
-var game = new Phaser.Game(config);
+var game = new Phaser.Game(1200, 720, Phaser.AUTO, 'game', {
+    preload: preload, create: create, update: update, render: render
+});
 
 function preload ()
 {
     this.load.image('ground', 'assets/platform.png')
     this.load.image('backdrop', 'assets/qubodup-light_wood.png')
-    this.load.spritesheet('ninja1', 
-    'assets/ninja-small.png',
-    { frameWidth: 130, frameHeight: 90 }) 
-    this.load.spritesheet('slime1', 
-    'assets/slime.png',
-    { frameWidth: 32, frameHeight: 32 })
+    this.load.spritesheet('ninja1', 'assets/ninja-small.png', 130, 90); 
+    this.load.spritesheet('slime1', 'assets/slime.png', 32, 32);
+
     // this.load.spritesheet('ninja1', 
     // 'assets/ninja2.png',
     // { frameWidth: 200, frameHeight: 145 }
@@ -36,43 +35,56 @@ function preload ()
 function create()
 {
 
+game.physics.startSystem(Phaser.Physics.ARCADE);
+
 //=== 
 //background 
 //===
-    let bg = this.add.image('0', '0', 'backdrop');
-    bg.setOrigin(0,0)
+    let bg = this.add.tileSprite(0, 0, 1200, 720, 'backdrop');
 
 //=== 
 //player sprite setup
 //===
 
-    player = this.physics.add.sprite(200, 500, 'ninja1');
-    // player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
-    player.setScale(1, 1);
+    player = this.add.sprite(200, 500, 'ninja1');
+    game.physics.arcade.enable(player);
+    player.body.collideWorldBounds = true;
+    player.scale.setTo(1, 1);
+    player.body.setSize(60, 60, 0, 10);
     player.direction = 'right';
+    // x size, y size, x offset, y offset
+    //player.body.setSize(40, 40, 0, 0); 
     createPlayer1Animations();
+
 
 //=== 
 //enemy sprite setup
 //===
-    slime1 = this.physics.add.sprite(200, 100, 'slime1');
-    slime1.setCollideWorldBounds(true);
-    slime1.setScale(3)
-    createSlimeAnimations();
+    slime1 = this.add.sprite(200, 100, 'slime1');
+    game.physics.arcade.enable(slime1);
+    slime1.body.collideWorldBounds = true;
+    slime1.scale.setTo(2.5)
+    slime1.body.setSize(20, 20, 13, 40);
+    slime1.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 8, true);
+    // createSlimeAnimations();
+
 
 //=== 
 //player input setup  
 //===
     cursors = this.input.keyboard.createCursorKeys();
-    keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
 
 
 //=== 
 //player - enemy collisions
 //===
 
-this.physics.add.collider(player, slime1);
+    // game.physics.arcade.overlap(player, slime1, collideFnc, null, this);
+}
+
+function collideFnc(player, enemy){
+    player.play('player-damage', false)
+    slime1.kill();
 }
 
 function update ()
@@ -82,45 +94,16 @@ function update ()
     enemy1Logic();
     //player2Logic()
 
+    game.physics.arcade.overlap(player, slime1, collideFnc, null, this);
 
-
-
+}
 
 //Notes for additional content
+function render(){
+    game.debug.bodyInfo(player);
+    game.debug.body(player);
 
-//startFollow function, to be used on enemies later
-// function create ()
-    // {
-    //     this.add.image(400, 300, 'sky');
-    //     var particles = this.add.particles('red');
-    //     var emitter = particles.createEmitter({
-    //         speed: 100,
-    //         scale: { start: 1, end: 0 },
-    //         blendMode: 'ADD'
-    //     });
-    //     var logo = this.physics.add.image(400, 100, 'logo');
-    //     logo.setVelocity(100, 200);
-    //     logo.setBounce(1, 1);
-    //     logo.setCollideWorldBounds(true);
-    //     emitter.startFollow(logo);
-    // }
-
- // var controlConfig = {
- //        left: cursors.left,
- //        right: cursors.right,
- //        up: cursors.up,
- //        down: cursors.down,
- //        p1attack: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
- //    };
-
-    // controls = new Phaser.Cameras.Controls.Smoothed(controlConfig);
-
-    // else
-    // {
-    //     player.setVelocityX(0);
-
-    //     player.anims.play('turn');
-    // }
+    game.debug.body(slime1);
 }
 
 
