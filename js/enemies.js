@@ -1,5 +1,21 @@
+
+function enemy1Logic(){
+
+
+     if (this.game.physics.arcade.distanceBetween(this.slime1, this.player) < 500)
+    {
+            this.game.physics.arcade.moveToObject(slime1, this.player, 80);
+            slime1.play("enemy-move", true)
+
+        }
+    }
+
+
+
 function createSlimeAnimations(){
-    slime1.animations.add('idle', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 8, true);
+    // slime1.animations.add('enemy-move', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 8, true);
+    slime1.animations.add('enemy-move', [21, 22, 23, 24, 25, 26, 27, 28, 29, 30], 12, true);
+
 
 //     // game.anims.create({
 //     //     key: 'enemy-left',
@@ -37,21 +53,3 @@ function createSlimeAnimations(){
 
     
 }
-
-function enemy1Logic(){
-
-    if(slime1.body.velocity.x===0 && slime1.body.velocity.y===0){
-        slime1.play("enemy-idle", true)
-    }
-
-     if (this.game.physics.arcade.distanceBetween(this.slime1, this.player) < 600)
-    {
-            this.game.physics.arcade.moveToObject(slime1, this.player, 80);
-        }
-    }
-
-
-
-//setvelocityx and y to 'speed'
-//
-//

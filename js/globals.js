@@ -1,4 +1,6 @@
-var player;
+var player = {
+	health:20
+};
 var cursors;
 var slime1;
 

@@ -1,6 +1,43 @@
+//===
+//Health / Damage Setup
+//===
+
+// if(player.health < 6){
+//     player.tint = 50
+// }
+    function playerDeath() {
+            if(player.health >0)
+            {
+                player.health -= 1;
+            } 
+            else if (player.health <= 0)
+            {
+                player.alive = false;
+                player.kill();
+            }
+    }
+
+// let flag = null;
+
+// setInterval(
+// function changeColor () {
+//     if(flag==true){
+//         player.tint = 16000000;        
+//         flag=false;
+//     }
+//     else if (flag==false){
+//         player.tint = 16777215;
+//         flag = true;
+//     }
+// }, 500);
+
+    
 function player1Logic(){
-	player.body.velocity.set(0);
-	player.anchor.setTo(.5,.5);
+    player.body.velocity.set(0);
+    player.anchor.setTo(.5,.5);
+    // if(player.health < 6){
+    //     changeColor();
+    // }
 
 	if (cursors.left.isDown)
     {
@@ -41,7 +78,7 @@ function player1Logic(){
     
 }
 
-function directionCheck(direction) {
+    function directionCheck(direction) {
     if(direction === 'left'){
         player.play('left', false)
     } else {
