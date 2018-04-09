@@ -1,20 +1,34 @@
+// var enemyCanAttack = true;
+
+// function enemyHit(){
+// 	if(enemyCanAttack == true){
+// 	enemyCanAttack = false;	
+// 	setTimeout(function(){
+//             slime1.body.moves = false;
+//         }, 50);
+// 	} 
+// 	enemyCanAttack=true;
+// 	slime1.body.moves=true;
+// }
+
 
 function enemy1Logic(){
 
 
      if (this.game.physics.arcade.distanceBetween(this.slime1, this.player) < 500)
     {
-            this.game.physics.arcade.moveToObject(slime1, this.player, 80);
+            this.game.physics.arcade.moveToObject(slime1, this.player, 70);
             slime1.play("enemy-move", true)
 
-        }
+    }
+
     }
 
 
 
 function createSlimeAnimations(){
     // slime1.animations.add('enemy-move', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 8, true);
-    slime1.animations.add('enemy-move', [21, 22, 23, 24, 25, 26, 27, 28, 29, 30], 12, true);
+    slime1.animations.add('enemy-move', [21, 22, 23, 24, 25, 26, 27, 28, 29, 30], 17, true);
 
 
 //     // game.anims.create({

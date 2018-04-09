@@ -3,7 +3,7 @@
 //===
 
 // if(player.health < 6){
-//     player.tint = 50
+//     player.tint = 16000000
 // }
     function playerDeath() {
             if(player.health >0)
@@ -35,9 +35,9 @@
 function player1Logic(){
     player.body.velocity.set(0);
     player.anchor.setTo(.5,.5);
-    // if(player.health < 6){
-    //     changeColor();
-    // }
+    if(player.health < 6){
+    player.tint = 16000000;
+    }
 
 	if (cursors.left.isDown)
     {
