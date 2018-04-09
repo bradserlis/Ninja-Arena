@@ -12,7 +12,7 @@ var player1IsAttacking = false;
 // activate a hitbox by name
 function enableHitbox(hitboxName, left) {
   // search all the hitboxes
-  console.log(hitboxes.children);
+  // console.log(hitboxes.children);
   for(var i = 0; i < hitboxes.children.length; i++){
     // if we find the hitbox with the "name" specified
     if(hitboxes.children[i].name === hitboxName){

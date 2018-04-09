@@ -1,19 +1,10 @@
-var Game = {};
+var bootState = {
 
-Game.Boot = function {game}{
+	create: function(){
+		game.physics.startSystem(Phaser.Physics.ARCADE);
 
-};
-
-Game.Boot.prototype = {
-	init: function(){
+		game.state.start("load")
 	}
 
-preload:function(){
-	this.load.image('preloaderBar', assets/preloader.png)
-}
 
-
-create: function(){
-	this.state.start('Preloader');
-}
-}
+};
