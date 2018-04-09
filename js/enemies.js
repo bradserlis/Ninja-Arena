@@ -2,27 +2,23 @@
 
 // function enemyHit(){
 // 	if(enemyCanAttack == true){
-// 	enemyCanAttack = false;	
+// 	enemyCanAttack = false;
 // 	setTimeout(function(){
 //             slime1.body.moves = false;
 //         }, 50);
-// 	} 
+// 	}
 // 	enemyCanAttack=true;
 // 	slime1.body.moves=true;
 // }
 
 
 function enemy1Logic(){
-
-
-     if (this.game.physics.arcade.distanceBetween(this.slime1, this.player) < 500)
+    if (this.game.physics.arcade.distanceBetween(this.slime1, this.player) < 500)
     {
-            this.game.physics.arcade.moveToObject(slime1, this.player, 70);
-            slime1.play("enemy-move", true)
-
+      this.game.physics.arcade.moveToObject(slime1, this.player, 70);
+      slime1.play("enemy-move", true);
     }
-
-    }
+}
 
 
 
@@ -36,7 +32,7 @@ function createSlimeAnimations(){
 //     //     frames: game.anims.generateFrameNumbers('slime1', { start: 0, end: 4 }),
 //     //     frameRate: 15,
 //     //     repeat: 0
-//     // });  
+//     // });
 
 //     // game.anims.create({
 //     //     key: 'enemy-attack',
@@ -65,5 +61,5 @@ function createSlimeAnimations(){
 //     //     repeat:0
 //     // });
 
-    
+
 }
