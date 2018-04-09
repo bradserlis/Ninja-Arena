@@ -13,13 +13,14 @@
 // };
 
 
-var game = new Phaser.Game(1200, 600, Phaser.AUTO, 'game', {
+var game = new Phaser.Game(1215, 600, Phaser.AUTO, 'game', {
     preload: preload, create: create, update: update, render: render
 });
 
 function preload ()
 {
     this.load.image('ground', 'assets/platform.png')
+    this.load.image('arena', 'assets/gladiator.png')
     this.load.image('backdrop', 'assets/qubodup-light_wood.png')
     this.load.spritesheet('ninja1', 'assets/ninja-small.png', 130, 90); 
     this.load.spritesheet('slime1', 'assets/slime.png', 32, 32);
@@ -40,17 +41,19 @@ function create()
     //=== 
     //background 
     //===
-        let bg = this.add.tileSprite(0, 0, 1200, 600, 'backdrop');
+        // let bg = this.add.tileSprite(0, 0, 1200, 600, 'backdrop');
+        let bg = this.add.tileSprite(0, 0, 1000, 600, 'arena');
+        bg.scale.setTo(2.1, 1.25)
     //=== 
     //player sprite setup
     //===
 
-        player = this.add.sprite(200, 500, 'ninja1');
+        player = this.add.sprite(600, 700, 'ninja1');
         game.physics.arcade.enable(player);
         player.health = 8;
         player.body.collideWorldBounds = true;
         player.scale.setTo(1, 1);
-        player.body.setSize(60, 60, 0, 10);
+        player.body.setSize(60, 60, 0, 10); 
         player.direction = 'right';
         // x size, y size, x offset, y offset
         //player.body.setSize(40, 40, 0, 0); 
@@ -59,7 +62,7 @@ function create()
     //=== 
     //enemy sprite setup
     //===
-        slime1 = this.add.sprite(200, 100, 'slime1');
+        slime1 = this.add.sprite(600, 10, 'slime1');
         game.physics.arcade.enable(slime1);
         slime1.body.collideWorldBounds = true;
         slime1.scale.setTo(2.5)
