@@ -44,7 +44,11 @@ function create()
   slime1.body.collideWorldBounds = true;
   slime1.scale.setTo(2.5)
   slime1.body.setSize(20, 20, 13, 40);
+  slime1.health = 2;
   createSlimeAnimations();
+
+  slime2 = game.add.group();
+
 
   //===
   //player input setup
@@ -60,12 +64,17 @@ function create()
   player.addChild(hitboxes);
   // create a "hitbox" (really just an empty sprite with a physics body)
   swordLeft = hitboxes.create(0, 0, null);
+  swordRight = hitboxes.create(0, 0, null);
   // set the size of the hitbox, and its position relative to the player
   swordLeft.body.setSize(35, 60, player.width - 170, (player.height / 2) - 65);
   // add some properties to the hitbox. These can be accessed later for use in calculations
   swordLeft.name = "swordLeft";
   swordLeft.damage = 50;
-  swordLeft.knockbackAmt = 300;
+  swordLeft.knockbackAmt = 200;
+  swordRight.body.setSize(35, 60, 30, (player.height / 2) - 65);
+  swordRight.name = "swordRight";
+  swordRight.damage = 50;
+  swordRight.knockbackAmt = 200;
 
   disableAllHitboxes();
 }
@@ -75,7 +84,7 @@ function create()
 function update ()
 {
   player1Logic();
-  enemy1Logic();
+  slimeLogic();
   //player2Logic()
 
   //===
@@ -83,6 +92,7 @@ function update ()
   //===
   game.physics.arcade.overlap(player, slime1, collideFnc, null, this);
   game.physics.arcade.overlap(swordLeft, slime1, swordTime, null, this);
+  game.physics.arcade.overlap(swordRight, slime1, swordTime, null, this);
 }
 
 function collideFnc(player, enemy){
@@ -100,6 +110,7 @@ function swordTime(sword, slime){
   else {
     slime.position.x += sword.knockbackAmt;
   }
+  slimeDeath();
 }
 
 function render(){
@@ -109,5 +120,7 @@ function render(){
     game.debug.body(slime1);
     game.debug.body(hitboxes);
     game.debug.body(swordLeft);
+    game.debug.body(swordRight);
+
 }
 

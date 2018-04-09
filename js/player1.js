@@ -57,7 +57,7 @@ function player1Logic(){
   	if(game.time.now < player1NextAttack){
   		return;
   	}
-
+    
     player.play('attack', false);
     player1NextAttack = game.time.now + 500;
     player1IsAttacking = true;

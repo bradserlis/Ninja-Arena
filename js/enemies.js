@@ -12,19 +12,37 @@
 // }
 
 
-function enemy1Logic(){
-    if (this.game.physics.arcade.distanceBetween(this.slime1, this.player) < 500)
+function slimeLogic(){
+    if (this.game.physics.arcade.distanceBetween(this.slime1, this.player) > 100)
     {
       this.game.physics.arcade.moveToObject(slime1, this.player, 70);
-      slime1.play("enemy-move", true);
+      slime1.play("slime-move", true);
+    } else if(this.game.physics.arcade.distanceBetween(this.slime1, this.player) < 100){
+    	slime1.body.velocity.x = 0;
+    	slime1.body.velocity.y = 0;
+    	slime1.play("slime-attack", false);
     }
 }
 
-
+function slimeDeath() {
+  if(slime1.health >0)
+  {
+      slime1.health -= 1;
+  }
+  else if (slime1.health <= 0)
+  {
+      slime1.play('slime-die')
+      slime1.alive = false;
+      slime1.kill();
+  }
+}
 
 function createSlimeAnimations(){
     // slime1.animations.add('enemy-move', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 8, true);
-    slime1.animations.add('enemy-move', [21, 22, 23, 24, 25, 26, 27, 28, 29, 30], 17, true);
+    slime1.animations.add('slime-move', [21, 22, 23, 24, 25, 26, 27, 28, 29, 30], 17, true);
+    slime1.animations.add('slime-attack', [31, 32, 33, 34, 35, 36, 37, 38, 39, 40], 17, false);
+    slime1.animations.add('slime-die', [40, 41, 42, 43, 44, 45, 46, 47, 48, 49], 17, false);
+
 
 
 //     // game.anims.create({
