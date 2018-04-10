@@ -110,44 +110,7 @@ var playState = {
       game.physics.arcade.overlap(swordRight, slime1, swordTime, null, this);
       game.physics.arcade.overlap(swordLeft, slime2, swordTime, null, this);
       game.physics.arcade.overlap(swordRight, slime2, swordTime, null, this);
-    
-    function collideFnc(player, enemy){
-      console.log('slime hit me');
-      reviveTimer = game.time.now + 1000;
-      playerImmobile = true;
-      player.play('player-damage', false);
-      enemy.x -= 120;
-      playerDeath();
-    }
-
-    function swordTime(sword, slime){
-      console.log('hit that slime!');
-      if(player.direction === 'left'){
-        slime.position.x -= sword.knockbackAmt;
-      }
-      else {
-        slime.position.x += sword.knockbackAmt;
-      }
-      slimeDeath(slime);
-      winCheck(slime);
-    }
   },
-
-
-  // onHit: function(damage) {
-  // if (!player.invincible) {
-  //  We only damage the player if not invincible 
-  // player.health -= damage;
-  // //we toggle invincibility
-  // this.toggleInvincible();
-  //  //and then we add a timer to restore the player to a vulnerable state
-  //        game.time.events.add(2000, this.toggleInvincible, this); 
-  //            }
-  //   },
-  
-  // toggleInvincible: function() {
-  //                player.invincible = !player.invincible;
-  //     },
 
     render: function(){
         // game.debug.bodyInfo(slime1);
@@ -163,7 +126,9 @@ var playState = {
     win: function(){
       game.state.start('win');
     }
+    
 }
+
 
 
 

@@ -8,9 +8,17 @@ function playerDeath() {
   }
   else if (player.health <= 0)
   {
-      player.alive = false;
-      player.kill();
+      player.play('player-damage');
+      //working on this
+      game.time.events.add(2000, slowHeroDeath, this)
   }
+}
+
+function slowHeroDeath(player){
+player.alive = false;
+      player.kill();
+      mainbgm.stop();
+      game.state.start('gameover')
 }
 
 
@@ -20,22 +28,17 @@ function playerDeath() {
 //     player.body.moves = false;
 //     player.play('player-damage', false)
 //     toggleplayerImmobile();
-//     game.time.events.add(2000, this.toggleplayerImmobile, this);
+    // game.time.events.add(2000, this.toggleplayerImmobile, this);
 //     game.time.events.remove(this.player1Logic);
 //   }
 // }
 
-// function toggleplayerImmobile(){
-//   player.immovable = false;
-//   player.body.moves = true;
-//   playerImmobile = !playerImmobile;
-// }
 
 function player1Logic(){
   player.body.velocity.set(0);
   player.anchor.setTo(.5,.5);
 
-  if(player.health < 6){
+  if(player.health < 4){
     player.tint = 16000000;
   }
 
@@ -43,7 +46,7 @@ function player1Logic(){
     if (game.input.keyboard.isDown(Phaser.Keyboard.A))
     {
       swordsnd = game.add.audio("sword-swipe");
-      swordsnd.play();
+      swordsnd.play('', 0, 1, false);
       game.time.events.add(500, function(){
         player.play('idle', true);
         }, this);

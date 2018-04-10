@@ -13,3 +13,5 @@ LittleRobotSoundFactory @ freesound.org - https://freesound.org/people/LittleRob
 erkanozan @ freesound.org - https://freesound.org/people/erkanozan/
 
 Vhiiula - Backtrackin' from IHyper by BackTrack @ http://freemusicarchive.org/music/Backtrack/iHyper/
+
+LittleRobotSoundFactory @ freesound.org - https://freesound.org/people/LittleRobotSoundFactory/
