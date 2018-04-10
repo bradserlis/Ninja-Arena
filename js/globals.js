@@ -18,13 +18,14 @@ var herodamage;
 var hitBoxes;
 var swordLeft;
 var swordRight;
-var currentLevel=1;
+var currentLevel=2;
 
 var player1NextAttack = 0;
 var player1IsAttacking = false;
 var playerImmobile = false;
 var reviveTimer = 0;
 var nextHop = 0;
+var flashingHealth = 0;
 
 // activate a hitbox by name
 function enableHitbox(hitboxName, left) {

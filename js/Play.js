@@ -13,8 +13,6 @@ var playState = {
     slimeDeathSound = game.add.audio('slime-death');
     swordsnd = game.add.audio("sword-swipe");
 
-
-
     //===
     //background
     //===
@@ -48,7 +46,7 @@ var playState = {
     slime1.body.collideWorldBounds = true;
     slime1.scale.setTo(2.5)
     slime1.body.setSize(15, 15, 0, 10);
-    slime1.health = 2;
+    slime1.health = 5;
     slime1.anchor.set(0.5, 0.5)
     createSlimeAnimations();
     } else if(currentLevel==2)

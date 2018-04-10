@@ -21,17 +21,6 @@ function slowHeroDeath(){
 }
 
 
-// function playerCannotMove(){
-//   if(!playerImmobile){
-//     player.immovable = true;
-//     player.body.moves = false;
-//     player.play('player-damage', false)
-//     toggleplayerImmobile();
-    // game.time.events.add(2000, this.toggleplayerImmobile, this);
-//     game.time.events.remove(this.player1Logic);
-//   }
-// }
-
 function swordAttackSound(){
   swordsnd.play('', 0, .4, false);
 }
@@ -41,17 +30,20 @@ function player1Logic(){
   player.anchor.setTo(.5,.5);
 
   if(player.health < 4){
-    player.tint = 16000000;
+    if(game.time.now < flashingHealth){
+        player.tint = 16000000;
+        flashingHealth = game.time.now + 2500;
+    } else 
+    {
+        player.tint = 16777215;
+    };
   }
 
   if(!playerImmobile){
     if (game.input.keyboard.isDown(Phaser.Keyboard.A))
     {
       game.time.events.add(50, swordAttackSound, this)
-      game.time.events.add(3000, function()
-      {
-      player.play('idle', false);
-      }, this);
+      
       if(game.time.now < player1NextAttack)
       {
         return;
@@ -107,7 +99,6 @@ function player1Logic(){
     playerImmobile = false;
   }
 
-
 }
 
 function directionCheck(direction) {
@@ -125,7 +116,7 @@ function createPlayer1Animations(){
 	player.animations.add('up', [0, 1, 2, 3], 8, false);
 	player.animations.add('down', [0, 1, 2, 3], 8, false);
 	player.animations.add('attack', [0, 1, 2], 10, false);
-	player.animations.add('idle', [3, 4, 5, 6], 10, false);
+	player.animations.add('idle', [3, 4, 5, 6], 15, false);
 	// player.animations.add('turn', [0,], 3, false);
 	player.animations.add('player-damage', [24, 26], 2, false)
 }

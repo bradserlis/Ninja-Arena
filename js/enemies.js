@@ -1,13 +1,14 @@
 
 function createSlime(){
-  let newSlime = slime2.create(360 + Math.random() * 200, 120 + Math.random() * 200,'slime1');
+  let newSlime = slime2.create(360 + Math.random() * 400, 100 + Math.random() * 200,'slime1');
   newSlime.scale.setTo(2.5);
   game.physics.arcade.enable(newSlime);
   newSlime.body.collideWorldBounds = true;
-  newSlime.health = 2;
+  newSlime.health = 5;
   newSlime.anchor.set(0.5, 0.5);
 
   newSlime.animations.add("group-slime-move", [21, 22, 23, 24, 25, 26, 27, 28, 29, 30], 17, true);
+  newSlime.animations.add('slime-die',[40, 41, 42, 43, 44, 45, 46, 47, 48, 49], 17, false);
 }
 
 
@@ -37,17 +38,21 @@ function slimeLogic(){
 
 function slimeLogic2(){
   slime2.children.forEach(function(s){
-    if(s.health <= 0 ){
-      console.log(s.health);
+    if(s.health <= 0 )
+    {
       s.body.velocity.x = 0;
       s.body.velocity.y = 0;
     }
-    if(game.time.now > nextHop){
+    else if(this.game.physics.arcade.distanceBetween(s, this.player) > 95)
+      {
+        game.physics.arcade.moveToObject(s, this.player, 70);
+        s.play('group-slime-move', true);
+      }
+    if(game.time.now > nextHop)
+      {
         hop.play('', 0, .3, false);
         nextHop = game.time.now + 650;
       }
-    game.physics.arcade.moveToObject(s, this.player, 70);
-    s.play('group-slime-move', true);
   }); 
 }
 
