@@ -1,13 +1,20 @@
 var player;
 var cursors;
 var slime1;
+var slime2;
+var slime3;
+var slime4;
+
 var hitBoxes;
 var swordLeft;
 var swordRight;
+var bgm;
+var swordsnd;
+var currentLevel=1;
 
 var player1NextAttack = 0;
 var player1IsAttacking = false;
-
+var playerImmobile = false;
 
 // activate a hitbox by name
 function enableHitbox(hitboxName, left) {

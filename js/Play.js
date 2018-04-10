@@ -20,6 +20,7 @@ var playState = {
     player.scale.setTo(1, 1);
     player.body.setSize(30, 60, 0, 10);
     player.direction = 'right';
+    player.anchor.set(0.5, 0.5)
     // x size, y size, x offset, y offset
     //player.body.setSize(40, 40, 0, 0);
     createPlayer1Animations();
@@ -27,15 +28,30 @@ var playState = {
     //===
     //enemy sprite setup
     //===
+      slime2 = game.add.group();
+      slime2.enableBody = true;
+
+    if(currentLevel==1){
     slime1 = this.add.sprite(600, 10, 'slime1');
     game.physics.arcade.enable(slime1);
     slime1.body.collideWorldBounds = true;
     slime1.scale.setTo(2.5)
-    slime1.body.setSize(20, 20, 13, 40);
+    slime1.body.setSize(15, 15, 0, 10);
     slime1.health = 2;
+    slime1.anchor.set(0.5, 0.5)
     createSlimeAnimations();
+    } else if(currentLevel==2)
+    {
+      for(let i=0; i<3; i++){
+        createSlime();
+      // slime2.scale.setTo(2.5);
+      // slime2.body.setSize(15, 15, 0, 10);
+      // slime2.health = 2;
+      // slime2.anchor.set(0.5, 0.5);
+      // slime2.body.collideWorldBounds = true;
+      }
+    }
 
-    slime2 = game.add.group();
 
 
     //===
@@ -70,7 +86,15 @@ var playState = {
       update: function ()
     {
       player1Logic();
+      
+      if(currentLevel==1){
+
       slimeLogic();
+      } 
+      // else if(currentLevel==2){
+
+      // slimeLogic2();
+      // }
       //player2Logic()
 
       //===
@@ -82,7 +106,8 @@ var playState = {
     
     function collideFnc(player, enemy){
       console.log('slime hit me');
-      player.play('player-damage', false);
+      playerCannotMove();
+      // player.play('player-damage', false);
       enemy.x -= 90;
       playerDeath();
     }
@@ -96,17 +121,39 @@ var playState = {
         slime.position.x += sword.knockbackAmt;
       }
       slimeDeath();
+      winCheck();
     }
   },
+
+
+  // onHit: function(damage) {
+  // if (!player.invincible) {
+  //  We only damage the player if not invincible 
+  // player.health -= damage;
+  // //we toggle invincibility
+  // this.toggleInvincible();
+  //  //and then we add a timer to restore the player to a vulnerable state
+  //        game.time.events.add(2000, this.toggleInvincible, this); 
+  //            }
+  //   },
+  
+  // toggleInvincible: function() {
+  //                player.invincible = !player.invincible;
+  //     },
+
     render: function(){
-        game.debug.bodyInfo(slime1);
-        game.debug.body(player);
+        // game.debug.bodyInfo(slime1);
+        // game.debug.body(player);
 
-        game.debug.body(slime1);
-        game.debug.body(hitboxes);
-        game.debug.body(swordLeft);
-        game.debug.body(swordRight);
+        game.debug.body(slime2);
+        // game.debug.body(hitboxes);
+        // game.debug.body(swordLeft);
+        // game.debug.body(swordRight);
 
+    },
+
+    win: function(){
+      game.state.start('win');
     }
 }
 
