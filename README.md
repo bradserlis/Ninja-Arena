@@ -15,3 +15,8 @@ erkanozan @ freesound.org - https://freesound.org/people/erkanozan/
 Vhiiula - Backtrackin' from IHyper by BackTrack @ http://freemusicarchive.org/music/Backtrack/iHyper/
 
 LittleRobotSoundFactory @ freesound.org - https://freesound.org/people/LittleRobotSoundFactory/
+
+Gobusto @ freesound.org - https://opengameart.org/content/mutant-death
+
+
+OwlStorm @ freesound.org -https://freesound.org/people/OwlStorm/

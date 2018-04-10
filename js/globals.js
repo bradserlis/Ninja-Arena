@@ -9,7 +9,11 @@ var slime4;
 
 var bgm;
 var mainbgm;
+var victory;
 var swordsnd;
+var slimeDeathSound;
+var herodamage;
+
 
 var hitBoxes;
 var swordLeft;

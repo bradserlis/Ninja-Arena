@@ -7,8 +7,7 @@ function createSlime(){
   newSlime.health = 2;
   newSlime.anchor.set(0.5, 0.5);
 
-//in progress
-  // newSlime.animations.add("group-slime-move", )
+  newSlime.animations.add("group-slime-move", [21, 22, 23, 24, 25, 26, 27, 28, 29, 30], 17, true);
 }
 
 
@@ -28,7 +27,7 @@ function slimeLogic(){
       slime1.play("slime-move", true);
 
       if(game.time.now > nextHop){
-        snd.play('', 0, 1, false);
+        hop.play('', 0, .3, false);
         nextHop = game.time.now + 650;
       }
     } 
@@ -38,11 +37,19 @@ function slimeLogic(){
 
 function slimeLogic2(){
   slime2.children.forEach(function(s){
+    if(s.health <= 0 ){
+      console.log(s.health);
+      s.body.velocity.x = 0;
+      s.body.velocity.y = 0;
+    }
+    if(game.time.now > nextHop){
+        hop.play('', 0, .3, false);
+        nextHop = game.time.now + 650;
+      }
     game.physics.arcade.moveToObject(s, this.player, 70);
-    // s.callAll('play', null, 'slime-group-move');
+    s.play('group-slime-move', true);
   }); 
 }
-
 
 
 function slimeDeath(slime) {
@@ -52,8 +59,8 @@ function slimeDeath(slime) {
   {
     console.log('slime is dying!');
     slime.play('slime-die');
+    slimeDeathSound.play('', 0, 1, false);
     game.time.events.add(2000, slowSlimeDeath, this, slime);
-
   }
 }
 
@@ -69,6 +76,7 @@ function winCheck(slime){
   if(currentLevel === 1){
     if(!slime.alive){
       currentLevel += 1;
+      mainbgm.stop();
       game.state.start('win');
     }
   }
@@ -82,6 +90,7 @@ function winCheck(slime){
     });
     if(allDead){
       currentLevel += 1;
+      mainbgm.stop();
     game.state.start('win');
     }
   }

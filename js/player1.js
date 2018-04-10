@@ -9,13 +9,12 @@ function playerDeath() {
   else if (player.health <= 0)
   {
       player.play('player-damage');
-      //working on this
       game.time.events.add(2000, slowHeroDeath, this)
   }
 }
 
-function slowHeroDeath(player){
-player.alive = false;
+function slowHeroDeath(){
+      player.alive = false;
       player.kill();
       mainbgm.stop();
       game.state.start('gameover')

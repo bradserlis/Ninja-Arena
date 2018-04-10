@@ -9,7 +9,10 @@ var loadState = {
     game.load.spritesheet('slime1', 'assets/slime.png', 32, 34);
     game.load.audio('menu', 'assets/menu.wav'); 
     game.load.audio('hop', 'assets/hop.wav'); 
+    game.load.audio('playerDamage', 'assets/playerdamage.wav'); 
+    game.load.audio('victory', 'assets/victory.wav'); 
     game.load.audio('sword-swipe', 'assets/sword-swipe.wav'); 
+    game.load.audio('slime-death', 'assets/slimedeath.wav'); 
     game.load.audio('main-bgm', 'assets/main.mp3'); 
 
 

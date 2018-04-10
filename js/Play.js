@@ -7,8 +7,11 @@ var playState = {
     //music!
     //
     mainbgm = game.add.audio('main-bgm');
-    mainbgm.play('', 0, 1, false)
-    snd = game.add.audio('hop');
+    mainbgm.play('', 0, .3, false)
+    hop = game.add.audio('hop');
+    playerDamage = game.add.audio('playerDamage');
+    slimeDeathSound = game.add.audio('slime-death');
+
 
     //===
     //background
@@ -126,7 +129,7 @@ var playState = {
     win: function(){
       game.state.start('win');
     }
-    
+
 }
 
 
