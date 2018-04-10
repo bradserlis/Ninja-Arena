@@ -27,7 +27,7 @@ function slimeLogic(){
       slime1.play("slime-move", true);
 
       if(game.time.now > nextHop){
-        hop.play('', 0, .3, false);
+        hop.play('', 0, .2, false);
         nextHop = game.time.now + 650;
       }
     } 

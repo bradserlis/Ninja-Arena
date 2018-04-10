@@ -11,6 +11,8 @@ var playState = {
     hop = game.add.audio('hop');
     playerDamage = game.add.audio('playerDamage');
     slimeDeathSound = game.add.audio('slime-death');
+    swordsnd = game.add.audio("sword-swipe");
+
 
 
     //===

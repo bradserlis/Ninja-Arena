@@ -1,6 +1,6 @@
     function collideFnc(player, enemy){
       console.log('slime hit me');
-      reviveTimer = game.time.now + 1000;
+      reviveTimer = game.time.now + 900;
       playerDamage.play();
       playerImmobile = true;
       player.play('player-damage', false);
