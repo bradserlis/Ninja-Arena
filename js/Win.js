@@ -11,6 +11,7 @@ var winState = {
 	},
 
 	restart: function(){
+		mainbgm.stop();
 		game.state.start('play')
 	}
 }

@@ -1,8 +1,8 @@
 var menuState = {
 	create: function(){
-		// var menubg = this.add.image(0, 0, 600, 600, 'ninja-menu');
+		var menubg = game.add.sprite(150, 100, 'ninja-menu');
+		var nameLabel = game.add.text(80, 80, 'Ninja Arena', {font: '60px Arial center', fill: '#ffffff'});
 
-		var nameLabel = game.add.text(80, 80, 'My First Game', {font: '50px Arial', fill: '#ffffff'});
 
 		var startLabel = game.add.text(80, game.world.height - 80, 'press the "enter" key to start', {font: '25px Arial', fill: '#ffffff'});
 
@@ -15,6 +15,7 @@ var menuState = {
 	},
 
 	start: function(){
+		bgm.stop();
 		game.state.start('play');
 	}
 

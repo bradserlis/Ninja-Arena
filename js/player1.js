@@ -14,22 +14,22 @@ function playerDeath() {
 }
 
 
-function playerCannotMove(){
-  if(!playerImmobile){
-    player.immovable = true;
-    player.body.moves = false;
-    player.play('player-damage', false)
-    toggleplayerImmobile();
-    game.time.events.add(2000, this.toggleplayerImmobile, this);
-    game.time.events.remove(this.player1Logic);
-  }
-}
+// function playerCannotMove(){
+//   if(!playerImmobile){
+//     player.immovable = true;
+//     player.body.moves = false;
+//     player.play('player-damage', false)
+//     toggleplayerImmobile();
+//     game.time.events.add(2000, this.toggleplayerImmobile, this);
+//     game.time.events.remove(this.player1Logic);
+//   }
+// }
 
-function toggleplayerImmobile(){
-  player.immovable = false;
-  player.body.moves = true;
-  playerImmobile = !playerImmobile;
-}
+// function toggleplayerImmobile(){
+//   player.immovable = false;
+//   player.body.moves = true;
+//   playerImmobile = !playerImmobile;
+// }
 
 function player1Logic(){
   player.body.velocity.set(0);
@@ -39,64 +39,67 @@ function player1Logic(){
     player.tint = 16000000;
   }
 
-	if (cursors.left.isDown)
-  {
+  if(!playerImmobile){
+    if (game.input.keyboard.isDown(Phaser.Keyboard.A))
+    {
+      swordsnd = game.add.audio("sword-swipe");
+      swordsnd.play();
+      game.time.events.add(500, function(){
+        player.play('idle', true);
+        }, this);
+      if(game.time.now < player1NextAttack){
+        return;
+      }
+      
+      player.play('attack', false);
+      player1NextAttack = game.time.now + 500;
+      player1IsAttacking = true;
 
-    player.body.velocity.x = -160;
-    player.scale.x = -1;
-    player.play('left', false);
-    player.direction = 'left';
-  }
-  else if (cursors.right.isDown)
-  {
-    player.body.velocity.x = 160;
-    player.scale.x = 1;
-    player.play('right', false);
-    player.direction = 'right';
-  }
-  else if (cursors.up.isDown)
-  {
-    player.body.velocity.y = -160;
-    directionCheck(player.direction);
-  }
-  else if(cursors.down.isDown)
-  {
-    player.body.velocity.y = 160;
-    directionCheck(player.direction);
-  }
-  // Attack is a separate if statement so we can potentially
-  // move and hit at the same time
-  else if (game.input.keyboard.isDown(Phaser.Keyboard.A))
-  {
-    swordsnd = game.add.audio("sword-swipe");
-    swordsnd.play();
-    game.time.events.add(500, function(){
-      player.play('idle', true);
-      }, this);
-  	if(game.time.now < player1NextAttack){
-  		return;
-  	}
-    
-    player.play('attack', false);
-    player1NextAttack = game.time.now + 500;
-    player1IsAttacking = true;
-
-    if(player.direction === 'left'){
-      enableHitbox('swordLeft', player.direction);
+      if(player.direction === 'left'){
+        enableHitbox('swordLeft', player.direction);
+      }
+      else {
+        enableHitbox('swordRight', player.direction);
+      }
     }
-    else {
-      enableHitbox('swordRight', player.direction);
+    else if (cursors.left.isDown)
+    {
+      player.body.velocity.x = -160;
+      player.scale.x = -1;
+      player.play('left', false);
+      player.direction = 'left';
     }
-  }
+    else if (cursors.right.isDown)
+    {
+      player.body.velocity.x = 160;
+      player.scale.x = 1;
+      player.play('right', false);
+      player.direction = 'right';
+    }
+    else if (cursors.up.isDown)
+    {
+      player.body.velocity.y = -160;
+      directionCheck(player.direction);
+    }
+    else if(cursors.down.isDown)
+    {
+      player.body.velocity.y = 160;
+      directionCheck(player.direction);
+    }
+    else if(!player1IsAttacking) {
+      player.play('idle', false);
+    }
 
+  }
+  
   if(game.time.now > player1NextAttack){
     player1IsAttacking = false;
   }
   if(!player1IsAttacking){
     disableAllHitboxes();
   }
-  else if(!player1IsAttacking) {
-    player.play('idle', false);
+  if(playerImmobile && game.time.now > reviveTimer){
+    playerImmobile = false;
   }
 
 
