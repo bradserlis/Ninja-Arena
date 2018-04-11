@@ -9,6 +9,8 @@ function playerDeath() {
   else if (player.health <= 0)
   {
       player.tint = 10;
+      playerImmobile=true;
+      reviveTimer = 999999999;
       game.time.events.add(3000, slowHeroDeath, this)
   }
 }
@@ -17,6 +19,7 @@ function slowHeroDeath(){
       player.alive = false;
       player.kill();
       mainbgm.stop();
+      bossBGM.stop();
       game.state.start('gameover')
 }
 
