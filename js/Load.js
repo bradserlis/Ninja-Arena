@@ -13,6 +13,7 @@ var loadState = {
     game.load.audio('playerDamage', 'assets/playerdamage.wav'); 
     game.load.audio('victory', 'assets/victory.wav'); 
     game.load.audio('sword-swipe', 'assets/sword-swipe.wav'); 
+    game.load.audio('chickenCluck', 'assets/chickenCluck.mp3'); 
     game.load.audio('slime-death', 'assets/slimedeath.wav'); 
     game.load.audio('main-bgm', 'assets/main.mp3'); 
 

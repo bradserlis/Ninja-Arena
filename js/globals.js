@@ -14,6 +14,7 @@ var victory;
 var swordsnd;
 var slimeDeathSound;
 var herodamage;
+var chickenCluck;
 
 
 var hitBoxes;

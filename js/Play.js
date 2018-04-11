@@ -12,6 +12,8 @@ var playState = {
     playerDamage = game.add.audio('playerDamage');
     slimeDeathSound = game.add.audio('slime-death');
     swordsnd = game.add.audio("sword-swipe");
+    chickenCluck = game.add.audio('chickenCluck')
+
 
     //===
     //background
@@ -138,8 +140,8 @@ var playState = {
       game.physics.arcade.overlap(swordRight, slime1, swordTime, null, this);
       game.physics.arcade.overlap(swordLeft, slime2, swordTime, null, this);
       game.physics.arcade.overlap(swordRight, slime2, swordTime, null, this);
-      game.physics.arcade.overlap(swordLeft, bossRooster, swordTime, null, this);
-      game.physics.arcade.overlap(swordRight, bossRooster, swordTime, null, this);
+      game.physics.arcade.overlap(swordLeft, bossRooster, chickenHit, null, this);
+      game.physics.arcade.overlap(swordRight, bossRooster, chickenHit, null, this);
       
       game.physics.arcade.overlap(peckLeft, player, peck, null, this);
       game.physics.arcade.overlap(peckRight, player, peck, null, this);

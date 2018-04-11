@@ -18,6 +18,32 @@
 	  playerDeath();
     }
 
+    function chickenHit(sword, boss){
+    	console.log('hit the boss!');
+    	chickenCluck.play();
+      boss.tint = 16000000;
+      game.time.events.add(100, function(){
+      	boss.tint = 16777215;
+      }, boss);
+	 game.time.events.add(100, function(){
+      	boss.tint = 16000000;
+      }, boss);
+      game.time.events.add(100, function(){
+      	boss.tint = 16777215;
+      }, boss);
+      if(bossRooster.scale.x == -2)
+		{
+      	boss.body.velocity.x = -7;
+        boss.position.x -= sword.knockbackAmt;
+      }
+      else {
+      	boss.body.velocity.x = 7
+        boss.position.x += sword.knockbackAmt;
+      }
+
+      bossDeath(boss);
+    }
+
     function swordTime(sword, slime){
       console.log('hit that slime!');
       slime.tint = 16000000;
