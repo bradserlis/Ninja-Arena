@@ -31,18 +31,18 @@
       	slime.tint = 16777215;
       }, slime);
       if(player.direction === 'left'){
-      	slime.body.velocity.x = -5;
+      	slime.body.velocity.x = -7;
         slime.position.x -= sword.knockbackAmt;
       }
       else {
-      	slime.body.velocity.x = 5
+      	slime.body.velocity.x = 7
         slime.position.x += sword.knockbackAmt;
       }
 
       slimeDeath(slime);
     }
 
-    function peck(peckdir, player){
+    function peck(player){
     	if(player.direction === 'left')
     	{
     		player.position.x += 130;
@@ -51,3 +51,7 @@
     	}
     	playerDeath();
     }
+
+
+
+

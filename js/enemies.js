@@ -27,9 +27,7 @@ function slimeLogic(){
         hop.play('', 0, .2, false);
         nextHop = game.time.now + 650;
       }
-    } 
-
-    
+    }     
 }
 
 function slimeLogic2(){
@@ -52,6 +50,44 @@ function slimeLogic2(){
   }); 
 }
 
+function bossLogic(){
+    if(player.direction == 'left')
+    {
+      bossRooster.scale.x = 2
+    } else {
+      bossRooster.scale.x = -2;
+    }
+    if(bossRooster.health <= 0 ){
+      bossRooster.body.velocity.x = 0;
+      bossRooster.body.velocity.y = 0;
+    }
+    if(this.game.physics.arcade.distanceBetween(bossRooster, player) < 85){
+       if(game.time.now < bossNextAttack)
+      {
+        return;
+      }
+      bossRooster.play('boss-peck', false)
+      bossNextAttack = game.time.now + 500;
+      bossIsAttacking = true;
+      if(player.direction === 'left'){
+        enableEnemyHitbox('peckLeft', player.direction);
+      }
+      else {
+        enableHitbox('peckRight', player.direction);
+      }
+      if(game.time.now > bossNextAttack){
+        bossIsAttacking = false;
+      }
+      if(!bossIsAttacking){
+        disableAllEnemyHitboxes();
+      }
+    }
+    else if (this.game.physics.arcade.distanceBetween(this.bossRooster, this.player) > 85)
+    {
+      this.game.physics.arcade.moveToObject(bossRooster, this.player, 105);
+      bossRooster.play("boss-move", true);
+      }
+    }     
 
 function slimeDeath(slime) {
   slime.health -= 1;
@@ -108,7 +144,7 @@ function createSlimeAnimations(){
 }
 
 function createBossAnimations(){
-    bossRooster.animations.add("boss-move", [3,4,5,6], 15, true)
+    bossRooster.animations.add("boss-move", [3,4,5,6], 15, false)
     bossRooster.animations.add("boss-peck", [7,8,11,12,13], 15, false)
 }
 

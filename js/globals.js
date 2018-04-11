@@ -29,6 +29,9 @@ var player1IsAttacking = false;
 var playerImmobile = false;
 var reviveTimer = 0;
 var nextHop = 0;
+var nextPeck = 0;
+var bossNextAttack = 0;
+var bossIsAttacking = false;
 var flashingHealth = 0;
 
 // activate a hitbox by name
@@ -44,7 +47,7 @@ function enableHitbox(hitboxName, left) {
   }
 }
 
-function enableEnemyHitbox(hotboxName, left){
+function enableEnemyHitbox(enemyHitboxName, left){
     for(var i = 0; i < enemyHitboxes.children.length; i++){
       if(enemyHitboxes.children[i].name === enemyHitboxName){
         enemyHitboxes.children[i].reset(0, 0);
