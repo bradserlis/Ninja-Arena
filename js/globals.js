@@ -2,6 +2,7 @@ var MAX_LEVEL = 2;
 
 var player;
 var cursors;
+var bossRooster;
 var slime1;
 var slime2;
 var slime3;
@@ -16,9 +17,12 @@ var herodamage;
 
 
 var hitBoxes;
+var enemyHitBoxes;
 var swordLeft;
+var peckLeft;
+var peckRight;
 var swordRight;
-var currentLevel=2;
+var currentLevel=3;
 
 var player1NextAttack = 0;
 var player1IsAttacking = false;
@@ -40,9 +44,22 @@ function enableHitbox(hitboxName, left) {
   }
 }
 
+function enableEnemyHitbox(hotboxName, left){
+    for(var i = 0; i < enemyHitboxes.children.length; i++){
+      if(enemyHitboxes.children[i].name === enemyHitboxName){
+        enemyHitboxes.children[i].reset(0, 0);
+      }
+    }
+}
+
 // disable all active hitboxes
 function disableAllHitboxes() {
   hitboxes.forEachExists(function(hitbox) {
+    hitbox.kill();
+  });
+}
+function disableAllEnemyHitboxes() {
+  enemyHitboxes.forEachExists(function(hitbox) {
     hitbox.kill();
   });
 }

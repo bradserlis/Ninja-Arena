@@ -53,12 +53,17 @@ var playState = {
     {
       for(let i=0; i<3; i++){
         createSlime();
-      // slime2.scale.setTo(2.5);
-      // slime2.body.setSize(15, 15, 0, 10);
-      // slime2.health = 2;
-      // slime2.anchor.set(0.5, 0.5);
-      // slime2.body.collideWorldBounds = true;
       }
+    }
+    else if(currentLevel ==3){
+        bossRooster = this.add.sprite(600, 10, 'bossRooster')
+        game.physics.arcade.enable(bossRooster);
+        bossRooster.body.collideWorldBounds = true;
+        bossRooster.scale.setTo(2);
+        bossRooster.body.setSize(12, 12, 0, 10);
+        bossRooster.health = 20;
+        bossRooster.anchor.set(.5,.5);
+        createBossAnimations();
     }
 
 
@@ -83,11 +88,27 @@ var playState = {
     // add some properties to the hitbox. These can be accessed later for use in calculations
     swordLeft.name = "swordLeft";
     swordLeft.damage = 50;
-    swordLeft.knockbackAmt = 200;
+    swordLeft.knockbackAmt = 100;
     swordRight.body.setSize(35, 60, 30, (player.height / 2) - 65);
     swordRight.name = "swordRight";
     swordRight.damage = 50;
-    swordRight.knockbackAmt = 200;
+    swordRight.knockbackAmt = 100;
+
+    enemyHitboxes = game.add.group();
+    enemyHitboxes.enableBody = true;
+    if(currentLevel == 1){
+      slime1.addChild(enemyHitboxes); 
+    }
+    peckLeft = enemyHitboxes.create(0, 0, null);
+    peckRight = enemyHitboxes.create(0, 0, null);
+    peckLeft.body.setSize(35, 60, bossRooster.width - 170, (bossRooster.height / 2) - 65);
+    peckLeft.name = "peckLeft";
+    peckLeft.damage = 50;
+    peckLeft.knockbackAmt = 200;
+    peckRight.body.setSize(35, 60, 30, (bossRooster.height / 2) - 65);
+    peckRight.name = "peckRight";
+    peckRight.damage = 50;
+    peckRight.knockbackAmt = 200;
 
     disableAllHitboxes();
   },
@@ -113,14 +134,22 @@ var playState = {
       game.physics.arcade.overlap(swordRight, slime1, swordTime, null, this);
       game.physics.arcade.overlap(swordLeft, slime2, swordTime, null, this);
       game.physics.arcade.overlap(swordRight, slime2, swordTime, null, this);
+      game.physics.arcade.overlap(peckLeft, player, peck, null, this);
+      game.physics.arcade.overlap(peckRight, player, peck, null, this);
+  
   },
 
     render: function(){
         // game.debug.bodyInfo(slime1);
         // game.debug.body(player);
 
-        game.debug.body(slime2);
+        // game.debug.body(slime2);
+        game.debug.body(bossRooster);
         // game.debug.body(hitboxes);
+        // game.debug.body(enemyHitboxes);
+        game.debug.body(peckLeft);
+        game.debug.body(peckRight);
+
         // game.debug.body(swordLeft);
         // game.debug.body(swordRight);
 
