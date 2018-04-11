@@ -20,7 +20,7 @@
 
     function chickenHit(sword, boss){
     	console.log('hit the boss!');
-    	chickenCluck.play();
+    	chickenCluck.play('', 0, .5, false);
       boss.tint = 16000000;
       game.time.events.add(100, function(){
       	boss.tint = 16777215;

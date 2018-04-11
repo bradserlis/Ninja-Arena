@@ -12,7 +12,7 @@ var playState = {
 
     if(currentLevel==1 || currentLevel ==2){
       mainbgm.play('', 0, .3, false)} else{
-        bossBGM.play();
+        bossBGM.play('', 0, .8, false);
       }
     hop = game.add.audio('hop');
     playerDamage = game.add.audio('playerDamage');
@@ -30,7 +30,7 @@ var playState = {
     //===
     //player sprite setup
     //===
-    player = this.add.sprite(600, 700, 'ninja1');
+    player = this.add.sprite(600, 500, 'ninja1');
     game.physics.arcade.enable(player);
     player.health = 8;
     player.body.collideWorldBounds = true;
