@@ -9,8 +9,7 @@ function playerDeath() {
   else if (player.health <= 0)
   {
       player.tint = 10;
-      playerImmobile=true;
-      reviveTimer = 999999999;
+      reviveTimer = game.time.now + 2000;
       game.time.events.add(3000, slowHeroDeath, this)
   }
 }
