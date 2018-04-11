@@ -3,7 +3,12 @@
 # Controls
 
 A - ATTACK
-Directional Arrows 'up','down','left','right' - MOVE
+Directional Arrows:
+'up'
+'down'
+'left'  - MOVE
+'right' 
+
 "ENTER" to confirm in MENU
 
 # Credits:
