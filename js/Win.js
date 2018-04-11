@@ -1,13 +1,21 @@
 var winState = {
 
 	create: function(){
-		
 		victory = game.add.sound('victory');
+
+		if(currentLevel <4)
+		{
 		victory.play()
 		var winLabel = game.add.text(80, 80, 'WAVE COMPLETE', {font: '50px Arial', fill: '#00FF00'});
 		console.log(currentLevel)
-		var startLabel = game.add.text(80, game.world.height - 80, 'press the "enter" key to continue', {font: '25px Arial', fill: '#ffffff'});
+		var startLabel = game.add.text(80, game.world.height - 80, 'press the "enter" key to continue', {font: '25px Arial', fill: '#ffffff'});	
+		} else
+		{
+			finalVictory.play();
+			var finalWinLabel = game.add.text(80, 80, "YOU'VE DEFEATED THE BOSS! YOU WIN!", {font: '50px Arial', fill: '#00FF00'});
+		}
 
+		var startLabel = game.add.text(80, game.world.height - 80, 'press the "enter" key to continue', {font: '25px Arial', fill: '#ffffff'});	
 		var enterkey = game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
 
 		enterkey.onDown.addOnce(this.restart, this);
@@ -15,6 +23,12 @@ var winState = {
 
 	restart: function(){
 		mainbgm.stop();
-		game.state.start('play')
+		finalVictory.stop();
+		if(currentLevel < 4)
+		{
+			game.state.start('play')
+		} else {
+			game.state.start('menu')
+		}
 	}
 }

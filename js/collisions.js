@@ -14,7 +14,7 @@
       playerDamage.play();
       playerImmobile = true;
       player.play('player-damage', false, true);
-      enemy.x -= 130;
+      enemy.x -= 140;
 	  playerDeath();
     }
 

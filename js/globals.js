@@ -1,4 +1,4 @@
-var MAX_LEVEL = 2;
+var MAX_LEVEL = 3;
 
 var player;
 var cursors;
@@ -10,6 +10,8 @@ var slime4;
 
 var bgm;
 var mainbgm;
+var bossBGM;
+var finalVictory;
 var victory;
 var swordsnd;
 var slimeDeathSound;
@@ -23,7 +25,7 @@ var swordLeft;
 var peckLeft;
 var peckRight;
 var swordRight;
-var currentLevel=3;
+var currentLevel=1;
 
 var player1NextAttack = 0;
 var player1IsAttacking = false;

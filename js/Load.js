@@ -16,6 +16,8 @@ var loadState = {
     game.load.audio('chickenCluck', 'assets/chickenCluck.mp3'); 
     game.load.audio('slime-death', 'assets/slimedeath.wav'); 
     game.load.audio('main-bgm', 'assets/main.mp3'); 
+    game.load.audio('boss-bgm', 'assets/boss-bgm.ogg'); 
+    game.load.audio('finalVictory', 'assets/finalVictory.ogg'); 
 
 	},
 

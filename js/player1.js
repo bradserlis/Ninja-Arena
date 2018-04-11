@@ -30,9 +30,9 @@ function player1Logic(){
   player.anchor.setTo(.5,.5);
 
   if(player.health < 4){
-    if(game.time.now < flashingHealth){
-        player.tint = 16000000;
-        flashingHealth = game.time.now + 2500;
+    if(game.time.now > flashingHealth){
+        player.tint = 12000000;
+        flashingHealth = game.time.now + 100;
     } else 
     {
         player.tint = 16777215;

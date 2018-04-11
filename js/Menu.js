@@ -16,7 +16,13 @@ var menuState = {
 
 	start: function(){
 		bgm.stop();
-		game.state.start('play');
+		if(currentLevel < 4)
+		{
+		game.state.start('play');	
+		} else 
+		{
+			return;
+		}
 	}
 
 

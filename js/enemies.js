@@ -61,12 +61,12 @@ function bossLogic(){
       bossRooster.body.velocity.x = 0;
       bossRooster.body.velocity.y = 0;
     }
-    else if (this.game.physics.arcade.distanceBetween(this.bossRooster, this.player) > 85)
+    else if (this.game.physics.arcade.distanceBetween(this.bossRooster, this.player) > 125)
     {
       this.game.physics.arcade.moveToObject(bossRooster, this.player, 205);
       bossRooster.play("boss-move", true);
       }
-    else if(this.game.physics.arcade.distanceBetween(bossRooster, player) < 85){
+    else if(this.game.physics.arcade.distanceBetween(bossRooster, player) < 125){
        if(game.time.now < bossNextAttack)
       {
         return;
@@ -150,7 +150,7 @@ function winCheck(slime){
   else if(currentLevel==3){
     if(!slime.alive){
       currentLevel += 1;
-      mainbgm.stop();
+      bossBGM.stop();
       game.state.start('win');
       console.log('you won the game!');
     }

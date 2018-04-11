@@ -7,7 +7,13 @@ var playState = {
     //music!
     //
     mainbgm = game.add.audio('main-bgm');
-    mainbgm.play('', 0, .3, false)
+    bossBGM = game.add.audio('boss-bgm');
+    finalVictory = game.add.audio('finalVictory');
+
+    if(currentLevel==1 || currentLevel ==2){
+      mainbgm.play('', 0, .3, false)} else{
+        bossBGM.play();
+      }
     hop = game.add.audio('hop');
     playerDamage = game.add.audio('playerDamage');
     slimeDeathSound = game.add.audio('slime-death');
@@ -71,14 +77,15 @@ var playState = {
         createBossAnimations();
     }
 
-
-
     //===
     //player input setup
     //===
     cursors = this.input.keyboard.createCursorKeys();
 
 
+    //===
+    //Hitbox Setup
+    //===
     // create a group for all the player's hitboxes
     hitboxes = game.add.group();
     // give all the hitboxes a physics body (I'm using arcade physics btw)
@@ -153,14 +160,14 @@ var playState = {
         // game.debug.body(player);
 
         // game.debug.body(slime2);
-        game.debug.body(bossRooster);
-        game.debug.body(hitboxes);
-        game.debug.body(enemyHitboxes);
-        game.debug.body(peckLeft);
-        game.debug.body(peckRight);
+        // game.debug.body(bossRooster);
+        // game.debug.body(hitboxes);
+        // game.debug.body(enemyHitboxes);
+        // game.debug.body(peckLeft);
+        // game.debug.body(peckRight);
 
-        game.debug.body(swordLeft);
-        game.debug.body(swordRight);
+        // game.debug.body(swordLeft);
+        // game.debug.body(swordRight);
 
     },
 
