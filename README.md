@@ -42,7 +42,7 @@ The stretch goal was to include a boss fight, a second player, power-ups after a
 
 # Technology
 
-The main technology for this project is Phaser 2.x. Ultimately, Phaser 2.2 was used after realizing that Phaser 3 had limited tutorials and resources available. Phaser runs on a canvas element and WebGL. JavaScript, minor CSS, and HTML was used.
+The main technology for this project is Phaser 2.x. Ultimately, Phaser 2.2 was used after realizing that Phaser 3 had limited tutorials and resources available. Phaser runs on a canvas element and WebGL. JavaScript, minor CSS, and HTML was also used, as well as Tiled for the background sprite. 
 
 # Approach Taken
 
