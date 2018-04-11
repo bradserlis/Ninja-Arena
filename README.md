@@ -1,6 +1,6 @@
 # Ninja Arena
 
-[Plan now!](https://bradserlis.github.io/project1 "Play now")
+[Play now!](https://bradserlis.github.io/project1 "Play now")
 
 
 # Controls
