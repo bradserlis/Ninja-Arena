@@ -27,7 +27,7 @@ function slimeLogic(){
         hop.play('', 0, .2, false);
         nextHop = game.time.now + 650;
       }
-    }     
+    }
 }
 
 function slimeLogic2(){
@@ -47,15 +47,17 @@ function slimeLogic2(){
         hop.play('', 0, .3, false);
         nextHop = game.time.now + 650;
       }
-  }); 
+  });
 }
 
 function bossLogic(){
     if(player.body.position.x > bossRooster.body.position.x)
     {
       bossRooster.scale.x = -2
+      bossRooster.direction = 'right';
     } else {
       bossRooster.scale.x = 2;
+      bossRooster.direction = 'left';
     }
     if(bossRooster.health <= 0 ){
       bossRooster.body.velocity.x = 0;
@@ -65,21 +67,22 @@ function bossLogic(){
     {
       this.game.physics.arcade.moveToObject(bossRooster, this.player, 205);
       bossRooster.play("boss-move", true);
-      }
+    }
     else if(this.game.physics.arcade.distanceBetween(bossRooster, player) < 125){
-       if(game.time.now < bossNextAttack)
+      if(game.time.now < bossNextAttack)
       {
         return;
       }
-      bossRooster.play('boss-peck', false)
-      bossNextAttack = game.time.now + 500;
+      bossRooster.play('boss-peck', false);
+      bossNextAttack = game.time.now + 800;
       bossIsAttacking = true;
-      if(player.direction === 'left'){
-        enableEnemyHitbox('peckLeft', player.direction);
+      if(bossRooster.direction === 'left'){
+        enableEnemyHitbox('peckLeft', bossRooster.body.position.x - 50, bossRooster.body.position.y);
       }
       else {
-        enableHitbox('peckRight', player.direction);
+        enableHitbox('peckRight', 0, 0);
       }
+
       if(game.time.now > bossNextAttack){
         bossIsAttacking = false;
       }
@@ -87,7 +90,7 @@ function bossLogic(){
         disableAllEnemyHitboxes();
       }
     }
-    }     
+  }
 
 function slimeDeath(slime) {
   slime.health -= 1;
@@ -169,4 +172,4 @@ function createBossAnimations(){
     bossRooster.animations.add("boss-die", [8], 15, false);
 }
 
-  
+
