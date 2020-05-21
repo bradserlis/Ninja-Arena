@@ -79,5 +79,13 @@
     }
 
 
-
+function collideChicken(player, peck){
+  console.log('player pecked by chicken');
+  if(bossRooster.direction == 'left'){
+    player.body.position.x -= 100;
+  }
+  else {
+    player.body.position.x += 100;
+  }
+}
 

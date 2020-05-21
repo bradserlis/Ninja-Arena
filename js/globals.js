@@ -20,7 +20,7 @@ var chickenCluck;
 
 
 var hitBoxes;
-var enemyHitBoxes;
+var enemyHitboxes;
 var swordLeft;
 var peckLeft;
 var peckRight;
@@ -38,7 +38,7 @@ var bossIsAttacking = false;
 var flashingHealth = 0;
 
 // activate a hitbox by name
-function enableHitbox(hitboxName, left) {
+function enableHitbox(hitboxName) {
   // search all the hitboxes
   // console.log(hitboxes.children);
   for(var i = 0; i < hitboxes.children.length; i++){
@@ -50,10 +50,13 @@ function enableHitbox(hitboxName, left) {
   }
 }
 
-function enableEnemyHitbox(enemyHitboxName, left){
+function enableEnemyHitbox(enemyHitboxName, x, y){
     for(var i = 0; i < enemyHitboxes.children.length; i++){
       if(enemyHitboxes.children[i].name === enemyHitboxName){
-        enemyHitboxes.children[i].reset(0, 0);
+        enemyHitboxes.children[i].body.position.x = x;
+        enemyHitboxes.children[i].body.position.y = y;
+        enemyHitboxes.children[i].revive();
+        // enemyHitboxes.children[i].reset(0, 0);
       }
     }
 }
